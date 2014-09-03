@@ -272,7 +272,7 @@ try {
   profileSelector.setLocalColorScheme(6);
 
   //status line
-  statusTitle = new GLabel(this, 388, 650, 280, 17, "");
+  statusTitle = new GLabel(this, 342, 650, 340, 17, "");
   statusTitle.setFont(new Font("Dialog", Font.BOLD, 14));
   statusTitle.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   statusTitle.setLocalColorScheme(7);
@@ -358,7 +358,7 @@ try {
   appTitle.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appTitle.setLocalColorScheme(9);
 
-  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.1)"); 
+  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.2)"); 
   appDesc.setFont(new Font("Dialog", Font.BOLD, 14));
   appDesc.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appDesc.setLocalColorScheme(9);
@@ -812,7 +812,7 @@ public void ParseJSONObjectToMainArray(JSONObject JSObject)
 
   indent = indent - 1;  
 
-  showMessage("Profile Loaded", 3000);
+  showMessage("'" + profileSelector.getSelectedText() +"' loaded", 5000);
 }   
 
 public void showMessage(String message, int showTime)
@@ -922,9 +922,11 @@ public void handleButtonEvents(GButton button, GEvent event) {
           f2 = new File(profileDir  + saveNameText +  "/start.gcode");       
           cp.copyFile(f1, f2);
 
+          //don't fail if profile.json is missing (not used by makerbot desktop)
+          try {
           f1 = new File(profileDir + profileSelector.getSelectedText() + "/profile.json");
           f2 = new File(profileDir + saveNameText + "/profile.json");       
-          cp.copyFile(f1, f2);
+          cp.copyFile(f1, f2); } catch (Exception e) {}
 
           if (button.tag == "SaveNewButton")
           {
@@ -942,8 +944,7 @@ public void handleButtonEvents(GButton button, GEvent event) {
       finally {
       }
     }
-
-
+    
 
     if (button.tag == "ShowAllButton")
     {
