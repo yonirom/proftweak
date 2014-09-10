@@ -358,7 +358,7 @@ try {
   appTitle.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appTitle.setLocalColorScheme(9);
 
-  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.2)"); 
+  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.3)"); 
   appDesc.setFont(new Font("Dialog", Font.BOLD, 14));
   appDesc.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appDesc.setLocalColorScheme(9);
@@ -912,21 +912,22 @@ public void handleButtonEvents(GButton button, GEvent event) {
           f.mkdir();
           saveJSONObject(json, profileDir + saveNameText + "/miracle.json");
 
-
-          JCopy cp = new JCopy(); 
-          File f1 = new File(profileDir + profileSelector.getSelectedText() + "/end.gcode");
-          File f2 = new File(profileDir + saveNameText + "/end.gcode");       
-          cp.copyFile(f1, f2);
-
-          f1 = new File(profileDir + profileSelector.getSelectedText() + "/start.gcode");
-          f2 = new File(profileDir  + saveNameText +  "/start.gcode");       
-          cp.copyFile(f1, f2);
-
-          //don't fail if profile.json is missing (not used by makerbot desktop)
+          //don't fail if auxilary files are missing (not used by makerbot desktop / replicator 5)
           try {
-          f1 = new File(profileDir + profileSelector.getSelectedText() + "/profile.json");
-          f2 = new File(profileDir + saveNameText + "/profile.json");       
-          cp.copyFile(f1, f2); } catch (Exception e) {}
+            JCopy cp = new JCopy(); 
+            File f1 = new File(profileDir + profileSelector.getSelectedText() + "/end.gcode");
+            File f2 = new File(profileDir + saveNameText + "/end.gcode");       
+            cp.copyFile(f1, f2);
+
+            f1 = new File(profileDir + profileSelector.getSelectedText() + "/start.gcode");
+            f2 = new File(profileDir  + saveNameText +  "/start.gcode");       
+            cp.copyFile(f1, f2);
+
+            //only profile.json is missing for Makerbot desktop / earlier replicators
+            f1 = new File(profileDir + profileSelector.getSelectedText() + "/profile.json");
+            f2 = new File(profileDir + saveNameText + "/profile.json");       
+            cp.copyFile(f1, f2);
+          } catch (Exception e) {}
 
           if (button.tag == "SaveNewButton")
           {
