@@ -358,7 +358,7 @@ try {
   appTitle.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appTitle.setLocalColorScheme(9);
 
-  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.3)"); 
+  GLabel appDesc = new GLabel(this, 385, 40, 300, 14, "A MakerWare profile editor (v1.4)"); 
   appDesc.setFont(new Font("Dialog", Font.BOLD, 14));
   appDesc.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   appDesc.setLocalColorScheme(9);
@@ -664,7 +664,6 @@ public void handleTextEvents(GEditableTextControl textarea, GEvent event) {
         }
       }
     }
-
     setEntryColor(textarea);
   }
 }
