@@ -2,6 +2,9 @@ Click "Download ZIP" to download everything.  Installers are included for Window
 
 --Important Note for MAC USERS--
 If you get an error "proftweak.app is damaged and can't be opened" - it is due to your Gatekeeper settings requiring apps be signed.  See http://support.apple.com/kb/HT5290 for the solution.
+To fix run:
+    codesign -s - -v --force proftweak.app/
+(In case you dont have the codesign binary - download Xcode from the App store)
 
 The general info / docs on ProfTweak are at:
 http://nothinglabs.blogspot.com/2013/09/introducing-proftweak-makerware-profile.html
